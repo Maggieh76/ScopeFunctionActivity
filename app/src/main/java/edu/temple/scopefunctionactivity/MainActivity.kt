@@ -12,8 +12,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        Log.d("function output", getTestDataArray().toString())
-
+        var array = getTestDataArray().toString()
+        Log.d("function One output", array)
+        Log.d("function Two output", averageLessThanMedian(array).toString())
         // You can test your helper functions by  calling them from onCreate() and
         // printing their output to the Log, which is visible in the LogCat:
         // eg. Log.d("function output", getTestDataArray().toString())
@@ -36,7 +37,8 @@ class MainActivity : AppCompatActivity() {
     }*/
 
     // Return true if average value in list is greater than median value, false otherwise
-    private fun averageLessThanMedian(listOfNumbers: List<Double>): Boolean {
+    private fun averageLessThanMedian(listOfNumbers: List<Double>): Boolean = if(listOfNumbers.sorted().size % 2 ==0 && (listOfNumbers.sorted()[listOfNumbers.sorted().size / 2] + listOfNumbers.sorted()[(listOfNumbers.sorted().size - 1) / 2]) / 2 < listOfNumbers.average()) return true else return listOfNumbers.sorted()[listOfNumbers.sorted().size / 2] < listOfNumbers.average()}
+    /* private fun averageLessThanMedian(listOfNumbers: List<Double>): Boolean {
         val avg = listOfNumbers.average()
         val sortedList = listOfNumbers.sorted()
         val median = if (sortedList.size % 2 == 0)
@@ -45,10 +47,15 @@ class MainActivity : AppCompatActivity() {
             sortedList[sortedList.size / 2]
 
         return avg < median
-    }
+    } */
 
     // Create a view from an item in a collection, but recycle if possible (similar to an AdapterView's adapter)
     private fun getView(position: Int, recycledView: View?, collection: List<Int>, context: Context): View {
+        return recycledView as? TextView ?: TextView(context).apply {
+            setPadding(5,10,10,0)
+            textSize == 22f
+    }.also { it.text = collection[position].toString()}
+    /*private fun getView(position: Int, recycledView: View?, collection: List<Int>, context: Context): View {
         val textView: TextView
 
         if (recycledView != null) {
@@ -63,5 +70,5 @@ class MainActivity : AppCompatActivity() {
 
         return textView
     }
-
+*/
 }

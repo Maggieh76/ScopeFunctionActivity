@@ -14,7 +14,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         var array = getTestDataArray().toString()
         Log.d("function One output", array)
-        Log.d("function Two output", averageLessThanMedian(array).toString())
         // You can test your helper functions by  calling them from onCreate() and
         // printing their output to the Log, which is visible in the LogCat:
         // eg. Log.d("function output", getTestDataArray().toString())
@@ -40,11 +39,11 @@ class MainActivity : AppCompatActivity() {
     private fun averageLessThanMedian(listOfNumbers: List<Double>): Boolean =
         listOfNumbers.average().let { average ->
             listOfNumbers.sorted().let { sortedList ->
-                val median = if (sortedList.size % 2 == 0)
+                val median = if (sortedList.size % 2 == 0) //even length list
                     (sortedList[sortedList.size / 2] + sortedList[(sortedList.size - 1) / 2]) / 2
                 else
-                    sortedList[sortedList.size / 2]
-                average < median
+                    sortedList[sortedList.size / 2] // odd length list
+                average < median//returns true if this is true
             }
         }
     /* private fun averageLessThanMedian(listOfNumbers: List<Double>): Boolean {

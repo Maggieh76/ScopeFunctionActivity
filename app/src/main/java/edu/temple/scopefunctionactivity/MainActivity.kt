@@ -37,7 +37,16 @@ class MainActivity : AppCompatActivity() {
     }*/
 
     // Return true if average value in list is greater than median value, false otherwise
-    private fun averageLessThanMedian(listOfNumbers: List<Double>): Boolean = if(listOfNumbers.sorted().size % 2 ==0 && (listOfNumbers.sorted()[listOfNumbers.sorted().size / 2] + listOfNumbers.sorted()[(listOfNumbers.sorted().size - 1) / 2]) / 2 < listOfNumbers.average()) return true else return listOfNumbers.sorted()[listOfNumbers.sorted().size / 2] < listOfNumbers.average()}
+    private fun averageLessThanMedian(listOfNumbers: List<Double>): Boolean =
+        listOfNumbers.average().let { average ->
+            listOfNumbers.sorted().let { sortedList ->
+                val median = if (sortedList.size % 2 == 0)
+                    (sortedList[sortedList.size / 2] + sortedList[(sortedList.size - 1) / 2]) / 2
+                else
+                    sortedList[sortedList.size / 2]
+                average < median
+            }
+        }
     /* private fun averageLessThanMedian(listOfNumbers: List<Double>): Boolean {
         val avg = listOfNumbers.average()
         val sortedList = listOfNumbers.sorted()
